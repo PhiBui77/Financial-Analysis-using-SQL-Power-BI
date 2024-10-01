@@ -1,0 +1,80 @@
+-- Data exploration and Cleaning
+
+SELECT * 
+FROM Financials
+LIMIT 50;
+
+SELECT DISTINCT COUNTRY 
+FROM financials;
+
+SELECT DISTINCT Segment
+FROM financials;
+
+-- Removing $ and ',' and updating columns to numeric VALUES. Also Rounding up Units_Sold column to the nearest whole number
+
+UPDATE Financials
+SET 
+Units_Sold = ROUND(CAST(REPLACE(REPLACE(Units_Sold, '$',''),',','') AS decimal(10,0)),0),
+Manufacturing_Price = CAST(REPLACE(REPLACE(Manufacturing_Price, '$',''),',','') AS decimal(10,2)),
+Sale_Price = CAST(REPLACE(REPLACE(Sale_Price, '$',''),',','') AS decimal(10,2)),
+Gross_Sales = CAST(REPLACE(REPLACE(Gross_Sales, '$',''),',','') AS decimal(10,2)),
+Sales = CAST(REPLACE(REPLACE(Sales, '$',''),',','') AS decimal(10,2)),
+COGS = CAST(REPLACE(REPLACE(COGS, '$',''),',','') AS decimal(10,2)),
+Profit = CAST(REPLACE(REPLACE(Profit, '$',''),',','') AS decimal(10,2));
+
+
+SELECT *
+FROM Financials;
+
+-- Replacing '-' to 0 in Discounts column
+
+SELECT Discounts
+FROM Financials
+WHERE discounts = '$-';
+
+UPDATE Financials
+SET Discounts = 0 
+WHERE Discounts = '$-';
+
+-- Removing $ and ',' from Discounts COLUMN
+
+UPDATE Financials
+SET Discounts = CAST(REPLACE(REPLACE(Discounts, '$',''),',','') AS decimal(10,2));
+
+
+
+-- checking if calcualtions are calculated correctly and consistent
+
+SELECT 
+SUM(units_sold * sale_price) as real_gross_sales,
+SUM(Gross_Sales)
+from Financials;
+
+SELECT SUM(gross_sales - discounts) as net_sales,
+SUM(Sales)
+from Financials;
+
+SELECT SUM(sales - COGS) as Profit,
+SUM(profit)
+FROM financials;
+
+
+-- Updating Columns with Recalculations
+
+UPDATE Financials
+SET Gross_Sales = Units_sold * sale_price;
+
+UPDATE Financials
+SET Sales = Gross_Sales - Discounts;
+
+UPDATE Financials
+SET Profit = Sales - COGS;
+
+SELECT * FROM Financials;
+
+
+
+
+
+
+
