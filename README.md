@@ -38,19 +38,19 @@ After data cleaning and EDA, the dataset was loaded into Power BI where general 
 
 **Key Insights**
 1. Sales Performance
-  - Sales by year and month show consistent growth patterns, with notable peaks in Oct 2014 and Dec 2014, where sales reached 12M.
+ - Sales by year and month show consistent growth patterns, with notable peaks in Oct 2014 and Dec 2014, where sales reached 12M.
 2. Performance by Country
-   - Germany and France have the highest profit margins, with 15.7% and 15.5% respectively.
-   - The United States has the lowest profit margin at 12%. However, in terms of units sold, the US ranks third, behind France (241K) and Canada (247K).
+- Germany and France have the highest profit margins, with 15.7% and 15.5% respectively.
+- The United States has the lowest profit margin at 12%. However, in terms of units sold, the US ranks third, behind France (241K) and Canada (247K).
 3. Segment performance
-   - Among segments, Channel Partners is the highest performing segment with a profit margin of 73.1%.
-   - Midmarket is second and Government third with 27.7% and 21.7% in profit margin, respectively.
-   - The Enterprise segment has a negative profit margin of -3.1% across all products.
-     - Filtering for the Enterprise segment, 33.3% of total sales have been sold with a high discount band, indicating a notable effect on profit margin.
+- Among segments, Channel Partners is the highest performing segment with a profit margin of 73.1%.
+- Midmarket is second and Government third with 27.7% and 21.7% in profit margin, respectively.
+- The Enterprise segment has a negative profit margin of -3.1% across all products.
+  - Filtering for the Enterprise segment, 33.3% of total sales have been sold with a high discount band, indicating a notable effect on profit margin.
 4. Impact of Discount on Sales and profit
-   - High and Medium discount bands, with 31.5% and 32.7% of total sales respectively, are the most commonly used strategies.
+- High and Medium discount bands, with 31.5% and 32.7% of total sales respectively, are the most commonly used strategies.
 5. Top Product Performers:
-   - Paseo is the leading product with an average sale of 33.0M, followed by VTT and Velo. These products significantly contribute to overall sales, with Paseo also showing strong profit margin performance.
+- Paseo is the leading product with an average sale of 33.0M, followed by VTT and Velo. These products significantly contribute to overall sales, with Paseo also showing strong profit margin performance.
 
 
 
