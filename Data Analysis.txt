@@ -1,0 +1,161 @@
+-- 1. Sales Analysis
+------------------------------------------------------------------------------------------------------------------------- 
+-- What is the total sales? 
+
+SELECT 
+SUM(Sales) as 'Total Sales',
+Year
+FROM Financials
+GROUP BY year;
+
+-- What was the percentage change in sales from previous year? 
+
+SELECT 
+SUM(sales) AS 'Total Sales',
+year,
+(SUM(sales) - LAG(SUM(sales)) OVER (ORDER BY Year)) / LAG(SUM(sales)) OVER (ORDER BY Year) * 100 as 'Percentage Change'
+FROM Financials
+GROUP BY year;
+
+-- Breakdown of sales by country, product, and segment
+
+SELECT
+country,
+segment,
+product ,
+SUM(sales) as 'Sales by Country'
+FROM Financials
+GROUP BY 1,2,3
+ORDER BY 1,2,3,4 DESC;
+
+-- Top performing customer Segment
+
+SELECT 
+Segment,
+SUM(Sales) as 'Sales by Segment'
+FROM Financials
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- Top performing products by Segment
+
+SELECT 
+Segment,
+Product,
+SUM(Sales) as 'Sales by Product'
+FROM Financials
+GROUP BY 1,2
+ORDER BY 1,3 DESC;
+
+SELECT 
+Product,
+SUM(Sales) as 'Sales by Product'
+FROM Financials
+GROUP BY 1
+ORDER BY 2 DESC;
+
+-- Top performers by Units Sold
+
+SELECT 
+Product,
+SUM(units_sold) AS 'Unit Sold by Product'
+FROM Financials
+GROUP BY 1
+ORDER BY 2 DESC;
+
+
+-- 2. Profit Analysis
+-------------------------------------------------------------------------------------------------- 
+
+-- What is the Profit and Profit Margin?
+
+SELECT 
+SUM(Profit) AS 'Total Profit',
+SUM(Profit) / SUM(sales) * 100 AS 'Profit Margin'
+FROM Financials;
+
+-- Profit margin by Country
+
+SELECT 
+country,
+SUM(Sales) AS 'Total Sales',
+SUM(Profit) / SUM(sales) * 100 AS 'Profit Margin'
+FROM Financials
+GROUP BY 1
+ORDER BY 3 DESC;
+
+-- Highest margin by segment and products
+
+SELECT 
+Segment,
+Product,
+SUM(Sales) AS 'Total Sales',
+SUM(Profit) / SUM(sales) * 100 AS 'Profit Margin'
+FROM Financials
+GROUP BY 1,2
+ORDER BY 1,2,3,4 DESC;
+
+
+-- 3. Impact of Discount on Sales and Profit
+-------------------------------------------------------------------------------------------------------------------------
+
+-- Impact of Discount on sales and Profit
+
+SELECT
+SUM(Gross_sales) as 'Total Gross Sales',
+SUM(sales) as 'Net Sales',
+SUM (Gross_Sales - COGS) as 'Pre Discount Profit',
+SUM(Profit) as 'Net Profit',
+SUM (Gross_Sales - COGS) / SUM(Gross_sales) * 100 as 'Pre Discount Profit Margin',
+SUM(Profit) / SUM(sales) *100 as 'Net Profit Margin'
+FROM Financials;
+
+SELECT 
+SUM(Gross_sales - COGS) - SUM(profit) as 'Impact of Discount'
+FROM financials;
+
+-- Which Customer segments have the highest discount and how does it affect profitability? 
+
+SELECT 
+Segment,
+SUM(Discounts) as 'Total Discounts',
+SUM(Gross_sales) as 'Total Gross Sales By Segment',
+SUM(sales) as 'Net Sales By Segment',
+SUM (Gross_Sales - COGS) as 'Pre Discount Profit',
+SUM(Profit) as 'Net Profit',
+SUM (Gross_Sales - COGS) / SUM(Gross_sales) * 100 as 'Pre Discount Profit Margin',
+SUM(Profit) / SUM(sales) *100 as 'Net Profit Margin'
+FROM Financials
+GROUP BY Segment
+ORDER BY 2 DESC;
+
+-- What is the sales and Profit by Discount Band? 
+
+SELECT 
+Discount_Band,
+SUM(sales) as 'Sales By Discound Band',
+SUM(Profit) as 'Profit By Discount Band',
+SUM(sales) /(SELECT SUM(Sales) FROM Financials) * 100 as 'Percentage of Total Sales',
+SUM(Profit)/ (SELECT SUM(Profit) FROM Financials) * 100 as 'Percentage of Total Profit'
+FROM Financials
+GROUP BY 1
+ORDER BY 2,3 DESC;
+
+-- Total Discount By product. How does it affect Profitability? 
+
+SELECT 
+product,
+SUM(Discounts) as 'Total Discounts',
+SUM(Gross_sales) as 'Total Gross Sales By Product',
+SUM(sales) as 'Net Sales By Product',
+SUM (Gross_Sales - COGS) as 'Pre Discount Profit',
+SUM(Profit) as 'Net Profit',
+SUM (Gross_Sales - COGS) / SUM(Gross_sales) * 100 as 'Pre Discount Profit Margin',
+SUM(Profit) / SUM(sales) *100 as 'Net Profit Margin'
+FROM Financials
+GROUP BY Product;
+
+
+
+
+
