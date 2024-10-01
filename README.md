@@ -53,6 +53,9 @@ After data cleaning and EDA, the dataset was loaded into Power BI where general 
 - Paseo is the leading product with an average sale of 33.0M, followed by VTT and Velo. These products significantly contribute to overall sales, with Paseo also showing strong profit margin performance.
 
 
+**Dashboard Overview**
+![image](https://github.com/user-attachments/assets/23dc6066-a9b7-4de1-b372-fccd8b5ff62d)
+
 
 
 
